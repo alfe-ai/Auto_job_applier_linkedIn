@@ -15,4 +15,10 @@ fi
 # shellcheck disable=SC1090
 source "$VENV_PATH/bin/activate"
 
+# Ensure required dependencies are installed
+if ! python -c "import pyautogui" >/dev/null 2>&1; then
+  echo "Installing Python dependencies..."
+  pip install -r "$SCRIPT_DIR/requirements.txt"
+fi
+
 python runAiBot.py "$@"
